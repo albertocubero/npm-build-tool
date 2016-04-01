@@ -8,11 +8,11 @@
   },
   "scripts": {
     "publish": "echo \"Publish Complete!\"",
-    "lint":"npm run lint:dir && npm run lint:dir --npm-build-tool:dir=test",
+    "lint": "npm run lint:dir && npm run lint:dir --npm-build-tool:dir=test",
     "lint:dir": "jshint $npm_package_config_dir/**.js",
     "build": "browserify $npm_package_config_dir/my-module.js > dist/my-module.min.js",
     "test": "mocha $npm_package_config_dir/",
-    "clean":"rm -rf dist && mkdir dist",
+    "clean": "rimraf dist && mkdir dist",
     "prepublish": "npm run clean",
     "prebuild": "npm run test --npm-build-tool:dir=test",
     "pretest": "npm run lint",
@@ -31,6 +31,7 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "jshint": "^2.9.1",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "rimraf": "^2.5.2"
   }
 }
