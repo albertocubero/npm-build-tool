@@ -5,7 +5,9 @@
   "main": "my-module.js",
   "scripts": {
     "publish": "echo \"Publish Complete!\"",
-    "lint": "jshint src/**.js",
+    "lint":"npm run lint:src && npm run lint:test",
+    "lint:src": "jshint src/**.js",
+    "lint:test": "jshint test/**.js",
     "build": "browserify src/my-module.js > dist/my-module.min.js",
     "test": "mocha test/",
     "clean":"rm -rf dist && mkdir dist",
