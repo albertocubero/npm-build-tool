@@ -4,7 +4,15 @@
   "description": "How to Use npm as a Build Tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"test command\""
+    "publish": "echo \"Publish Complete!\"",
+    "lint": "jshint src/**.js",
+    "build": "browserify src/index.js > dist/myproject.min.js",
+    "test": "echo \"test command\"",
+    "clean":"rm -rf dist && mkdir dist",
+    "prepublish": "npm run clean",
+    "prebuild": "npm run test",
+    "pretest": "npm run lint",
+    "postclean": "npm run build"
   },
   "repository": {
     "type": "git",
