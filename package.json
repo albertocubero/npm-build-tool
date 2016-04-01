@@ -1,0 +1,24 @@
+{
+  "name": "npm-build-tool",
+  "version": "1.0.0",
+  "description": "How to Use npm as a Build Tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"test command\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertocubero/npm-build-tool.git"
+  },
+  "author": "Alberto Cubero Navas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/albertocubero/npm-build-tool/issues"
+  },
+  "homepage": "https://github.com/albertocubero/npm-build-tool#readme",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "jshint": "^2.9.1",
+    "mocha": "^2.4.5"
+  }
+}
