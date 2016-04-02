@@ -8,15 +8,17 @@
   },
   "scripts": {
     "publish": "echo \"Publish Complete!\"",
-    "lint": "npm run lint:dir && npm run lint:dir --npm-build-tool:dir=test",
-    "lint:dir": "jshint $npm_package_config_dir/**.js",
-    "build": "browserify $npm_package_config_dir/my-module.js > dist/my-module.min.js",
+    "lint": "npm run lint:js && npm run lint:js --npm-build-tool:dir=test",
+    "lint:js": "jshint $npm_package_config_dir/**.js",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "browserify $npm_package_config_dir/my-module.js > dist/my-module.min.js",
+    "build:css": "stylus assets/styles/styles.styl -o dist/styles.css",
     "test": "mocha $npm_package_config_dir/",
     "clean": "rimraf dist && mkdir dist",
     "prepublish": "npm run clean",
+    "postclean": "npm run build",
     "prebuild": "npm run test --npm-build-tool:dir=test",
-    "pretest": "npm run lint",
-    "postclean": "npm run build"
+    "pretest": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
     "browserify": "^13.0.0",
     "jshint": "^2.9.1",
     "mocha": "^2.4.5",
-    "rimraf": "^2.5.2"
+    "rimraf": "^2.5.2",
+    "stylus": "^0.54.2"
   }
 }
