@@ -1,6 +1,6 @@
 {
   "name": "npm-build-tool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "How to Use npm as a Build Tool",
   "main": "my-module.js",
   "config": {
