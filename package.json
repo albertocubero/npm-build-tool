@@ -1,6 +1,6 @@
 {
   "name": "npm-build-tool",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "How to Use npm as a Build Tool",
   "main": "my-module.js",
   "config": {
@@ -11,8 +11,8 @@
     "lint": "npm run lint:js && npm run lint:js --npm-build-tool:dir=test",
     "lint:js": "jshint $npm_package_config_dir/**.js",
     "build": "npm run build:js && npm run build:css",
-    "build:js": "browserify $npm_package_config_dir/my-module.js > dist/my-module.min.js",
-    "build:css": "stylus -u autoprefixer-stylus -p assets/styles/styles.styl | cssmin > dist/styles.css",
+    "build:js": "browserify $npm_package_config_dir/my-module.js | hashmark -l 8 'dist/my-module.{hash}.min.js'",
+    "build:css": "stylus -u autoprefixer-stylus -p assets/styles/styles.styl | cssmin | hashmark -l 8 'dist/styles.{hash}.css'",
     "test": "mocha $npm_package_config_dir/",
     "clean": "rimraf dist && mkdir dist",
     "prepublish": "npm run clean",
@@ -34,6 +34,7 @@
     "autoprefixer-stylus": "^0.9.2",
     "browserify": "^13.0.0",
     "cssmin": "^0.4.3",
+    "hashmark": "^3.1.0",
     "jshint": "^2.9.1",
     "mocha": "^2.4.5",
     "rimraf": "^2.5.2",
