@@ -7,12 +7,15 @@
     "dir": "src"
   },
   "scripts": {
-    "publish": "echo \"Publish Complete!\"",
+    "publish": "npm run build:watch",
     "lint": "npm run lint:js && npm run lint:js --npm-build-tool:dir=test",
     "lint:js": "jshint $npm_package_config_dir/**.js",
     "build": "npm run build:js && npm run build:css",
+    "build:watch": "parallelshell 'npm run build:js:watch' 'npm run build:css:watch'",
     "build:js": "browserify $npm_package_config_dir/my-module.js | hashmark -l 8 'dist/my-module.{hash}.min.js'",
+    "build:js:watch": "watch 'npm run build:js' $npm_package_config_dir/",
     "build:css": "stylus -u autoprefixer-stylus -p assets/styles/styles.styl | cssmin | hashmark -l 8 'dist/styles.{hash}.css'",
+    "build:css:watch": "watch 'npm run build:css' assets/styles/",
     "test": "mocha $npm_package_config_dir/",
     "clean": "rimraf dist && mkdir dist",
     "prepublish": "npm run clean",
@@ -37,7 +40,9 @@
     "hashmark": "^3.1.0",
     "jshint": "^2.9.1",
     "mocha": "^2.4.5",
+    "parallelshell": "^2.0.0",
     "rimraf": "^2.5.2",
-    "stylus": "^0.54.2"
+    "stylus": "^0.54.2",
+    "watch": "^0.17.1"
   }
 }
