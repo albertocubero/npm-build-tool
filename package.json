@@ -25,7 +25,7 @@
     "clean:css": "rimraf dist/css && mkdir dist/css",
     
     "prebuild:watch": "npm run clean",
-    "prebuild":       "npm run clean",
+    "prebuild": "npm run clean",
 
     "prebuild:js": "npm run test",
     "pretest": "npm run lint",
