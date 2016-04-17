@@ -4,38 +4,30 @@
   "description": "How to Use npm as a Build Tool",
   "main": "my-module.js",
   "scripts": {
-    
     "lint": "npm run lint:js:src && npm run lint:js:test",
-    "lint:js:src": "jshint src/**.js",
+    "lint:js:src": "jshint assets/scripts/**.js",
     "lint:js:test": "jshint test/**.js",
-    
     "build": "npm run build:js && npm run build:css && npm run build:markup",
     "build:watch": "parallelshell 'npm run build:js:watch' 'npm run build:css:watch' 'npm run build:markup:watch'",
-    "build:js": "browserify src/my-module.js > dist/js/main.js",
-    "build:js:watch": "watch 'npm run clean:js && npm run build:js' src/",
-    "build:css": "stylus -u autoprefixer-stylus -p assets/styles/main.styl | cssmin > dist/css/main.min.css",
+    "build:js": "browserify -d assets/scripts/my-module.js -p [minifyify --compressPath . --map main.min.js.map --output dist/main.min.js.map] | hashmark -n dist/main.min.js -s -l 8 -m assets.json 'dist/{name}.min.{hash}{ext}' && npm run build:markup",
+    "build:js:watch": "watch 'npm run clean:js && npm run build:js' assets/scripts/",
+    "build:css": "stylus -u autoprefixer-stylus -p assets/styles/main.styl | cssmin > dist/main.min.css && hashmark -s -l 8 -m assets.json dist/main.min.css 'dist/{name}.{hash}{ext}' && npm run build:markup",
     "build:css:watch": "watch 'npm run clean:css && npm run build:css' assets/styles/",
-    "build:markup": "jade assets/markup/index.jade -o dist/",
+    "build:markup": "jade assets/markup/index.jade --obj assets.json -o dist/",
     "build:markup:watch": "watch 'npm run build:markup' assets/markup/",
-
     "test": "mocha test/",
-
-    "clean": "rimraf dist && mkdir dist && mkdir dist/js && mkdir dist/css",
-    "clean:js": "rimraf dist/js && mkdir dist/js",
-    "clean:css": "rimraf dist/css && mkdir dist/css",
-    
+    "clean": "rimraf dist && mkdir dist",
+    "clean:js": "rimraf dist/*.js",
+    "clean:css": "rimraf dist/*.css",
     "prebuild:watch": "npm run clean",
     "prebuild": "npm run clean",
-
     "prebuild:js": "npm run test",
     "pretest": "npm run lint",
-
     "live-reload": "live-reload --port 9091 dist/",
     "serve": "http-server -p 9090 dist/",
     "open:prod": "opener http://example.com",
     "open:stage": "opener http://staging.example.internal",
     "open:dev": "opener http://localhost:9090",
-
     "dev": "npm run open:dev -s && parallelshell 'npm run live-reload' 'npm run serve' 'npm run build:watch'"
   },
   "repository": {
@@ -52,10 +44,12 @@
     "autoprefixer-stylus": "^0.9.2",
     "browserify": "^13.0.0",
     "cssmin": "^0.4.3",
+    "hashmark": "^3.1.0",
     "http-server": "^0.9.0",
     "jade": "^1.11.0",
     "jshint": "^2.9.1",
     "live-reload": "^1.1.0",
+    "minifyify": "^7.3.3",
     "mocha": "^2.4.5",
     "opener": "^1.4.1",
     "parallelshell": "^2.0.0",

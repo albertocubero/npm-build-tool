@@ -2,11 +2,11 @@ doctype html
 html(lang="en")
     head
         title NPM Scripts Demo
-        script(src="js/main.js")
+        script(src="#{locals['dist/main.min.js'].substr(5)}")
         if compileDebug
             script(src="//localhost:9091/livereload.js")
 
-        link(rel="stylesheet",href="css/main.min.css")
+        link(rel="stylesheet",href="#{locals['dist/main.min.css'].substr(5)}")
       body
         h1 npm scripts demo
         #container

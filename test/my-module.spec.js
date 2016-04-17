@@ -1,4 +1,4 @@
-var myModule 	= require('../src/my-module');
+var myModule 	= require('../assets/scripts/my-module');
 var assert  	= require('assert');
 
 describe('myModule', function(){
