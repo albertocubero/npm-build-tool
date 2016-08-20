@@ -1,6 +1,6 @@
 # How to Use npm as a Build Tool
 
-> This How to Use npm as a Build Tool. NPM has a great subset of functionality decidated to running tasks to facilitate in a packages lifecycle - in other words, it is a great tool for build scripts.
+> NPM has a great subset of functionality decidated to running tasks to facilitate in a packages lifecycle - in other words, it is a great tool for build scripts.
 
 # Build Setup
 
